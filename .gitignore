@@ -1,0 +1,8 @@
+node_modules
+.env.local
+*.sql
+*.txt
+client_secret_1030265680478-9nllts69u73bap14vcst9d5prs1evlbi.apps.googleusercontent.com.json
+fiscion-49269efd11ee.json
+.next
+.vscode

@@ -1,0 +1,4 @@
+/* En lugar de múltiples @tailwind, usa: */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
