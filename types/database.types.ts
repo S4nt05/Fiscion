@@ -99,6 +99,8 @@ export interface Database {
           image: string | null
           tax_regime: 'general' | 'cuota_fija' | 'professional_services' | null
           fiscal_year_start: string | null
+          verification_status: "unverified" | "pending" | "verified" | "rejected"
+          verification_documents: Json | null
         }
         Insert: {
           id?: string
@@ -124,6 +126,8 @@ export interface Database {
           image?: string | null
           tax_regime?: 'general' | 'cuota_fija' | 'professional_services' | null
           fiscal_year_start?: string | null
+          verification_status?: "unverified" | "pending" | "verified" | "rejected"
+          verification_documents?: Json | null
         }
         Update: {
           id?: string
@@ -147,8 +151,10 @@ export interface Database {
           name?: string | null
           emailVerified?: string | null
           image?: string | null
-          tax_regime?: 'general' | 'cuota_fija' | 'professional_services'
+          tax_regime?: 'general' | 'cuota_fija' | 'professional_services' | null
           fiscal_year_start?: string
+          verification_status?: "unverified" | "pending" | "verified" | "rejected"
+          verification_documents?: Json | null
         }
         Relationships: []
       }
@@ -194,6 +200,27 @@ export interface Database {
         }
         Relationships: []
       }
+      ocr_debug_logs: {
+        Row: {
+          id: string
+          created_at: string
+          payload: Json | null
+          invoice_img_url: string | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          payload?: Json | null
+          invoice_img_url?: string | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          payload?: Json | null
+          invoice_img_url?: string | null
+        }
+        Relationships: []
+      }
       invoices: {
         Row: {
           id: string
@@ -213,9 +240,12 @@ export interface Database {
           currency: string
           category: string | null
           is_deductible: 'deducible' | 'no_deducible' | 'pendiente'
+          retention_tax: number | null
+          has_retention: boolean
           notes: string | null
           raw_text: string | null
           ocr_data: Json
+          niif_validation_section?: string | null
           ocr_confidence: number | null
           status: string
           reviewed_by_accountant_id: string | null
@@ -471,7 +501,7 @@ export interface Database {
       }
     }
     Enums: {
-      [_ in never]: never
+      verification_status_type: "unverified" | "pending" | "verified" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
